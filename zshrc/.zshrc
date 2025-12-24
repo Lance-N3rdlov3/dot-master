@@ -128,7 +128,9 @@ eza
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-
+source $HOME/.config/zsh/user.zsh
+source $HOME/.config/zsh/conf.d/*
+source $HOME/.config/zsh/functions/*
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
@@ -197,14 +199,14 @@ export FZF_DEFAULT_OPTS=" \
 --color=selected-bg:#51576D \
 --color=border:#737994"
 #starship theme
-eval "$(starship init zsh)"
+#eval "$(starship init zsh)"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export GOPATH=$HOME/go/
 export GOROOT=$(brew --prefix go)/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$PATH
 
-SOFT_SERVE_INITIAL_ADMIN_KEYS=$HOME/.ssh/id_ed25519
+#SOFT_SERVE_INITIAL_ADMIN_KEYS=$HOME/.ssh/id_ed25519
 
 # Added by LM Studio CLI (lms)
 export PATH="$PATH:/Users/nrd/.lmstudio/bin"

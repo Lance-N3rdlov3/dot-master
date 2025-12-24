@@ -1,3 +1,6 @@
 [settings]
 experimental = true
 go_set_gopath = true
+
+[tools]
+node = "latest"
