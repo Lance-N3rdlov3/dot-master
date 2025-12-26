@@ -1,0 +1,55 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# Fun/Retro theme with emojis
+format = """
+${custom.emoji}\
+$username\
+$directory\
+$git_branch\
+$nodejs\
+$python\
+$rust\
+$line_break\
+$character"""
+
+[custom.emoji]
+description = "Random emoji"
+command = "echo '🚀 💻 🎮 🎨 🎸 📚 🌮 🦊 🦄' | shuf -n1"
+shell = ["zsh", "-c"]
+style = "bold fg:yellow"
+
+[username]
+show_always = true
+format = '[$user]($style) '
+style_user = "fg:blue"
+
+[directory]
+style = "bold fg:green"
+format = '[$path]($style) '
+
+[git_branch]
+symbol = "🌿"
+style = "fg:peach"
+format = '[$symbol$branch]($style) '
+
+[nodejs]
+symbol = "💚"
+style = "fg:green"
+format = '[$symbol$version]($style) '
+
+[python]
+symbol = "🐍"
+style = "fg:yellow"
+format = '[$symbol$version]($style) '
+
+[rust]
+symbol = "🦀"
+style = "fg:red"
+format = '[$symbol$version]($style) '
+
+[character]
+success_symbol = '[⚡](bold fg:yellow)'
+error_symbol = '[💥](bold fg:red)'
+
+[line_break]
+disabled = false

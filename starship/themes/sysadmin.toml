@@ -1,0 +1,96 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+# System Administration theme - resource focused
+palette = 'catppuccin_frappe'
+
+format = """
+$os\
+$username\
+$hostname\
+$directory\
+$aws\
+$gcloud\
+$kubernetes\
+$git_branch\
+$cmd_duration\
+$line_break\
+$character"""
+
+[os]
+disabled = false
+style = "bold fg:blue"
+
+[username]
+show_always = true
+format = '[$user]($style)@'
+style_user = "fg:green"
+style_root = "fg:red"
+
+[hostname]
+style = "fg:blue"
+format = '[$hostname]($style) '
+
+[directory]
+style = "bold fg:yellow"
+format = '[$path]($style) '
+
+[git_branch]
+symbol = ""
+style = "fg:green"
+format = '[$symbol$branch]($style) '
+
+[aws]
+symbol = " "
+style = "fg:yellow"
+format = '[$symbol$region]($style) '
+
+[gcloud]
+symbol = " "
+style = "fg:blue"
+format = '[$symbol$account@$region]($style) '
+
+[kubernetes]
+symbol = "☸ "
+style = "fg:blue"
+format = '[$symbol$context]($style) '
+
+[cmd_duration]
+min_time = 2000
+format = '[$duration]($style) '
+style = "fg:red"
+
+[character]
+success_symbol = '[❯](bold fg:green)'
+error_symbol = '[❯](bold fg:red)'
+vimcmd_symbol = '[❮](bold fg:yellow)'
+
+[line_break]
+disabled = false
+
+[palettes.catppuccin_frappe]
+rosewater = "#f2d5cf"
+flamingo = "#eebebe"
+pink = "#f4b8e4"
+mauve = "#ca9ee6"
+red = "#e78284"
+maroon = "#ea999c"
+peach = "#ef9f76"
+yellow = "#e5c890"
+green = "#a6d189"
+teal = "#81c8be"
+sky = "#99d1db"
+sapphire = "#85c1dc"
+blue = "#8caaee"
+lavender = "#babbf1"
+text = "#c6d0f5"
+subtext1 = "#b5bfe2"
+subtext0 = "#a5adce"
+overlay2 = "#949cbb"
+overlay1 = "#838ba7"
+overlay0 = "#737994"
+surface2 = "#626880"
+surface1 = "#51576d"
+surface0 = "#414559"
+base = "#303446"
+mantle = "#292c3c"
+crust = "#232634"

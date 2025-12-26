@@ -1,0 +1,114 @@
+# Bashrc - Enhanced with useful aliases and functions
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Basic aliases
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+alias ll='ls -lah --color=auto'
+alias la='ls -A --color=auto'
+alias l='ls -CF --color=auto'
+
+# Navigation aliases
+alias ..='cd ..'
+alias ...='cd ../..'
+alias .3='cd ../../..'
+alias .4='cd ../../../..'
+alias .5='cd ../../../../..'
+
+# Utility aliases
+alias c='clear'
+alias cls='clear'
+alias reload='source ~/.bashrc'
+alias mkdir='mkdir -p'
+
+# Editor aliases
+alias vi='nvim'
+alias vim='nvim'
+alias v='nvim'
+
+# Git aliases
+alias g='git'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gp='git push'
+alias gl='git log --oneline --graph --decorate'
+alias gd='git diff'
+
+# Docker aliases
+alias d='docker'
+alias dc='docker-compose'
+alias dps='docker ps'
+alias dpsa='docker ps -a'
+alias di='docker images'
+alias dex='docker exec -it'
+
+# System administration aliases
+alias s='sudo'
+alias se='sudo -e'
+
+# Network utilities
+alias ping='ping -c 4'
+alias ports='netstat -tulanp 2>/dev/null || ss -tulanp'
+alias ip='ip -color'
+
+# Development aliases
+alias py='python3'
+alias pip='pip3'
+alias node='node'
+alias npm='npm'
+
+# Extract function
+extract() {
+    if [ -z "$1" ]; then
+        echo "Usage: extract <archive_file>"
+        return 1
+    fi
+
+    case "$1" in
+        *.tar.bz2|*.tbz) tar xvjf "$1" ;;
+        *.tar.gz|*.tgz) tar xvzf "$1" ;;
+        *.tar.xz|*.txz) tar xvJf "$1" ;;
+        *.bz2) bunzip2 "$1" ;;
+        *.gz) gunzip "$1" ;;
+        *.xz) unxz "$1" ;;
+        *.zip) unzip "$1" ;;
+        *.7z) 7z x "$1" ;;
+        *) echo "'$1' cannot be extracted with extract()" ;;
+    esac
+}
+
+# Create directory and cd into it
+mkcd() {
+    mkdir -p "$1" && cd "$1"
+}
+
+# Quick grep with context
+gsearch() {
+    grep -r "$1" . --include="*.py" --include="*.js" --include="*.ts" --include="*.java" --include="*.go"
+}
+
+# System info
+sysinfo() {
+    echo "=== System Info ==="
+    uname -a
+    echo -e "\n=== Uptime ==="
+    uptime
+    echo -e "\n=== Memory ==="
+    free -h 2>/dev/null || vm_stat
+    echo -e "\n=== Disk ==="
+    df -h | head -5
+}
+
+# Generate password
+genpass() {
+    local length="${1:-16}"
+    tr -dc A-Za-z0-9 </dev/urandom | head -c "$length"
+}
+
+# Load local bashrc if exists
+if [[ -f ~/.bashrc.local ]]; then
+    source ~/.bashrc.local
+fi
