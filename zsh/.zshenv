@@ -1,16 +1,9 @@
 #!/usr/bin/env zsh
 
-#! ██████╗░░█████╗░  ███╗░░██╗░█████╗░████████╗  ███████╗██████╗░██╗████████╗
-#! ██╔══██╗██╔══██╗  ████╗░██║██╔══██╗╚══██╔══╝  ██╔════╝██╔══██╗██║╚══██╔══╝
-#! ██║░░██║██║░░██║  ██╔██╗██║██║░░██║░░░██║░░░  █████╗░░██║░░██║██║░░░██║░░░
-#! ██║░░██║██║░░██║  ██║╚████║██║░░██║░░░██║░░░  ██╔══╝░░██║░░██║██║░░░██║░░░
-#! ██████╔╝╚█████╔╝  ██║░╚███║╚█████╔╝░░░██║░░░  ███████╗██████╔╝██║░░░██║░░░
-#! ╚═════╝░░╚════╝░  ╚═╝░░╚══╝░╚════╝░░░░╚═╝░░░  ╚══════╝╚═════╝░╚═╝░░░╚═╝░░░
+# .zshenv - Sourced for all shells (login, interactive, non-interactive)
+# Environment variables, PATH, and platform detection
 
-# Load all custom module files // Directories are ignored
-# As Directories are ignored, we can store a bunch of boilerplate script in a ``./conf.d/custom-directory``
-# then we can make an entry point script: `./conf.d/custom-directory.zsh`managing all the files in that directory
-
-for file in "${ZDOTDIR:-$HOME/.config/zsh}/conf.d/"*.zsh; do
-  [ -r "$file" ] && source "$file"
+# Source modular environment configurations
+for file in "${ZDOTDIR:-$HOME/.config/zsh}/conf.d/"{10-environment,15-xdg,20-paths}.zsh; do
+    [[ -r "$file" ]] && source "$file"
 done
