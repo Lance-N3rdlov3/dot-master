@@ -1,0 +1,7 @@
+{
+  "name": "generate-quiz",
+  "description": "Generate quiz questions on provided topic",
+  "prompt": "Generate 10 quiz questions on the provided topic. Include:\n1. Mix of difficulty levels (easy, medium, hard)\n2. Multiple choice format with 4 options each\n3. Correct answers clearly marked\n4. Explanations for each answer\n\nFocus on practical, real-world applications.",
+  "category": "learning",
+  "fabric_pattern": "create_quiz"
+}

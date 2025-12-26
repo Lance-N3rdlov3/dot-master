@@ -1,0 +1,102 @@
+# Shell scripting (bash/zsh) snippets
+# Created: 2025-12-26
+
+snippet shebang "Shell shebang"
+#!/usr/bin/env ${1:bash}
+endsnippet
+
+snippet function "Shell function"
+${1:function_name}() {
+    ${2:body}
+}
+endsnippet
+
+snippet if "Shell if statement"
+if [ ${1:condition} ]; then
+    ${2:body}
+fi
+endsnippet
+
+snippet elif "Shell elif"
+elif [ ${1:condition} ]; then
+    ${2:body}
+endsnippet
+
+snippet for "Shell for loop"
+for ${1:item} in ${2:list}; do
+    ${3:body}
+done
+endsnippet
+
+snippet while "Shell while loop"
+while [ ${1:condition} ]; do
+    ${2:body}
+done
+endsnippet
+
+snippet case "Shell case statement"
+case ${1:var} in
+    ${2:pattern1})
+        ${3:body}
+        ;;
+    ${4:pattern2})
+        ${5:body}
+        ;;
+    *)
+        ${6:default}
+        ;;
+esac
+endsnippet
+
+snippet getopt "Shell getopts parsing"
+while getopts "${1:opts}" opt; do
+    case "$opt" in
+        ${2:a})
+            ${3:action}
+            ;;
+        ${4:b})
+            ${5:action}
+            ;;
+        \?)
+            echo "Invalid option: -$OPTARG" >&2
+            exit 1
+            ;;
+    esac
+done
+endsnippet
+
+snippet check "Shell check command exists"
+if command -v ${1:command} &>/dev/null; then
+    ${2:body}
+fi
+endsnippet
+
+snippet log "Shell logging function"
+log() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] ${1:message}"
+}
+endsnippet
+
+snippet error "Shell error function"
+error() {
+    echo "[$(date +'%Y-%m-%d %H:%M:%S')] ERROR: ${1:message}" >&2
+}
+endsnippet
+
+snippet source "Shell source file"
+source "${1:file}"
+endsnippet
+
+snippet export "Shell export variable"
+export ${1:VAR}="${2:value}"
+endsnippet
+
+snippet array "Shell array declaration"
+${1:array}=(${2:item1 item2 item3})
+endsnippet
+
+snippet looparray "Shell loop through array"
+for ${1:item} in "${${2:array}[@]}"; do
+    ${3:body}
+done
+endsnippet

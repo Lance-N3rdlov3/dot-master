@@ -1,0 +1,104 @@
+# JavaScript/TypeScript development snippets
+# Created: 2025-12-26
+
+snippet console "console.log"
+console.log(${1:message});
+endsnippet
+
+snippet consolee "console.error"
+console.error(${1:message});
+endsnippet
+
+snippet consolew "console.warn"
+console.warn(${1:message});
+endsnippet
+
+snippet imp "ES6 import"
+import { ${1:name} } from '${2:module}';
+endsnippet
+
+snippet imps "ES6 import default"
+import ${1:name} from '${2:module}';
+endsnippet
+
+snippet exp "ES6 export"
+export { ${1:name} };
+endsnippet
+
+snippet exd "ES6 export default"
+export default ${1:value};
+endsnippet
+
+snippet fn "ES6 arrow function"
+const ${1:functionName} = (${2:args}) => {
+    ${3:body}
+};
+endsnippet
+
+snippet afn "ES6 async function"
+const ${1:functionName} = async (${2:args}) => {
+    ${3:body}
+};
+endsnippet
+
+snippet prom "Promise"
+new Promise((resolve, reject) => {
+    ${1:body}
+});
+endsnippet
+
+snippet fetch "Fetch API"
+fetch('${1:url}')
+    .then(response => response.json())
+    .then(data => ${2:console.log(data)})
+    .catch(error => ${3:console.error(error)});
+endsnippet
+
+snippet react "React component"
+import React from 'react';
+
+export const ${1:ComponentName} = () => {
+    return (
+        <div>
+            ${2:JSX}
+        </div>
+    );
+};
+
+export default ${1:ComponentName};
+endsnippet
+
+snippet reactc "React component with state"
+import React, { useState } from 'react';
+
+export const ${1:ComponentName} = () => {
+    const [${2:state}, set${2/(.*)/\u$1/}] = useState(${3:initialValue});
+
+    return (
+        <div>
+            ${4:JSX}
+        </div>
+    );
+};
+
+export default ${1:ComponentName};
+endsnippet
+
+snippet us "React useState"
+const [${1:state}, set${1/(.*)/\u$1/}] = useState(${2:initialValue});
+endsnippet
+
+snippet ue "React useEffect"
+useEffect(() => {
+    ${1:effect}
+    return () => {
+        ${2:cleanup}
+    };
+}, [${3:dependencies}]);
+endsnippet
+
+snippet ucr "React use callback"
+const ${1:callback} = useCallback((${2:args}) => {
+    ${3:body}
+}, [${4:dependencies}]);
+endsnippet

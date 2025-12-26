@@ -1,0 +1,6 @@
+{
+  "name": "dev-quiz",
+  "description": "Interactive development quiz generator",
+  "prompt": "Create an interactive programming quiz about ${1:topic}. Include:\n1. 5 questions with varying difficulty\n2. Code snippets to analyze\n3. Multiple choice or fill-in-the-blank format\n4. Immediate feedback on answers\n5. Explanations for correct answers\n\nMake it engaging and educational.",
+  "category": "learning"
+}

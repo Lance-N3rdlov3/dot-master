@@ -1,0 +1,7 @@
+{
+  "name": "extract-insights",
+  "description": "Extract key insights from content",
+  "prompt": "You are an expert at extracting wisdom and insights. Analyze the provided content and extract:\n1. Key principles and concepts\n2. Actionable takeaways\n3. Patterns or recurring themes\n4. Notable quotes or statements\n5. Related ideas worth exploring\n\nFormat output clearly with headings.",
+  "category": "research",
+  "fabric_pattern": "extract_wisdom"
+}

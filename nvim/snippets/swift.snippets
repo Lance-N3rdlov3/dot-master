@@ -1,0 +1,108 @@
+# Swift development snippets
+# Created: 2025-12-26
+
+snippet func "Swift function"
+func ${1:functionName}(${2:parameters}) -> ${3:ReturnType} {
+    ${4:body}
+}
+endsnippet
+
+snippet var "Swift variable"
+var ${1:name}: ${2:Type} = ${3:value}
+endsnippet
+
+snippet let "Swift constant"
+let ${1:name}: ${2:Type} = ${3:value}
+endsnippet
+
+snippet if "Swift if statement"
+if ${1:condition} {
+    ${2:body}
+}
+endsnippet
+
+snippet guard "Swift guard statement"
+guard let ${1:unwrapped} = ${2:optional} else {
+    ${3:handleNil}
+}
+endsnippet
+
+snippet for "Swift for loop"
+for ${1:item} in ${2:collection} {
+    ${3:body}
+endsnippet
+
+snippet while "Swift while loop"
+while ${1:condition} {
+    ${2:body}
+}
+endsnippet
+
+snippet struct "Swift struct"
+struct ${1:StructName} {
+    ${2:properties}
+
+    ${3:methods}
+}
+endsnippet
+
+snippet class "Swift class"
+class ${1:ClassName} {
+    ${2:properties}
+
+    ${3:init}
+
+    ${4:methods}
+}
+endsnippet
+
+snippet init "Swift initializer"
+init(${1:parameters}) {
+    ${2:body}
+}
+endsnippet
+
+snippet closure "Swift closure"
+${1:${2:parameters}} -> ${3:ReturnType} in
+    ${4:body}
+}
+endsnippet
+
+snippet print "Swift print statement"
+print(${1:message})
+endsnippet
+
+snippet import "Swift import"
+import ${1:Module}
+endsnippet
+
+snippet computed "Swift computed property"
+var ${1:name}: ${2:Type} {
+    get {
+        ${3:returnValue}
+    }
+    set {
+        ${4:body}
+    }
+}
+endsnippet
+
+snippet lazy "Swift lazy property"
+lazy var ${1:name}: ${2:Type} = {
+    ${3:initialization}
+}()
+endsnippet
+
+snippet task "Swift async task"
+Task {
+    ${1:body}
+}
+endsnippet
+
+snippet await "Swift await"
+await ${1:expression}
+endsnippet
+
+snippet optional "Swift optional type"
+var ${1:name}: ${2:Type}?
+endsnippet

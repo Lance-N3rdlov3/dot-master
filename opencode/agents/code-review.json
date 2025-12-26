@@ -1,0 +1,6 @@
+{
+  "name": "code-review",
+  "description": "Review code for bugs, security issues, and best practices",
+  "prompt": "Review the provided code thoroughly. Check for:\n1. Bugs and logical errors\n2. Security vulnerabilities\n3. Performance issues\n4. Code style and readability\n5. Best practices for the language/framework\n\nProvide specific, actionable feedback with code examples where appropriate.",
+  "category": "development"
+}

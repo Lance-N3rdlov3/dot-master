@@ -1,0 +1,7 @@
+{
+  "name": "note-summarizer",
+  "description": "Convert notes into structured report",
+  "prompt": "Convert the provided notes into a well-structured report. Include:\n1. Executive summary\n2. Key findings organized by topic\n3. Action items (with priorities)\n4. Open questions or areas for further research\n5. Appendices for supporting details\n\nUse clear headings and bullet points.",
+  "category": "research",
+  "fabric_pattern": "summarize_lecture"
+}

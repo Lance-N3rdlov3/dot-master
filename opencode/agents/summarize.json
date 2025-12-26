@@ -1,0 +1,7 @@
+{
+  "name": "summarize",
+  "description": "Summarize content using fabric pattern",
+  "prompt": "You are an expert content summarizer. Take the provided content and output:\n\n- A 20-word sentence summary in a section called ONE SENTENCE SUMMARY:\n- The 10 most important points (max 16 words each) in a section called MAIN POINTS:\n- The 5 best takeaways in a section called TAKEAWAYS:\n\nOnly output human readable Markdown.",
+  "category": "research",
+  "fabric_pattern": "create_summary"
+}

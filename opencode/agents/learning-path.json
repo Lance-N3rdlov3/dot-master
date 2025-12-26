@@ -1,0 +1,6 @@
+{
+  "name": "learning-path",
+  "description": "Suggest learning path for technology or skill",
+  "prompt": "Create a comprehensive learning path for ${1:topic}. Structure it as:\n1. Prerequisites and foundational knowledge\n2. Beginner milestones with specific resources\n3. Intermediate milestones with projects\n4. Advanced topics and specializations\n5. Practice projects and exercises\n6. Estimated timeline\n\nInclude specific books, courses, and practical resources.",
+  "category": "learning"
+}

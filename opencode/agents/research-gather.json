@@ -1,0 +1,6 @@
+{
+  "name": "research-gather",
+  "description": "Aggregate research on a topic from multiple perspectives",
+  "prompt": "Conduct comprehensive research on ${1:topic}. Include:\n1. Overview and definition\n2. Historical context and evolution\n3. Current state of the art\n4. Key challenges and debates\n5. Practical applications\n6. Future trends and predictions\n7. Key references and further reading\n\nSynthesize information from authoritative sources.",
+  "category": "research"
+}

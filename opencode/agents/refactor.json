@@ -1,0 +1,6 @@
+{
+  "name": "refactor",
+  "description": "Suggest refactoring improvements for code",
+  "prompt": "Analyze the provided code and suggest refactoring improvements. Focus on:\n1. Reducing code duplication\n2. Improving readability and maintainability\n3. Applying SOLID principles\n4. Optimizing performance\n5. Simplifying complex logic\n\nProvide before/after code examples.",
+  "category": "development"
+}

@@ -1,0 +1,6 @@
+{
+  "name": "test-generator",
+  "description": "Generate unit tests for provided code",
+  "prompt": "Generate comprehensive unit tests for the provided code. Include:\n1. Test cases for normal operations\n2. Edge cases and boundary conditions\n3. Error handling and exceptions\n4. Mocking where necessary\n\nUse appropriate testing frameworks for the language (e.g., pytest for Python, jest for JavaScript).",
+  "category": "development"
+}

@@ -1,0 +1,7 @@
+{
+  "name": "create-visualization",
+  "description": "Create Mermaid diagram from provided content",
+  "prompt": "Create a Mermaid diagram based on the provided content. Choose the most appropriate diagram type:\n- Flowchart for processes\n- Sequence diagram for interactions\n- Class diagram for structures\n- State diagram for state machines\n- Gantt chart for timelines\n\nEnsure the diagram is clear, properly formatted, and captures the key concepts.",
+  "category": "development",
+  "fabric_pattern": "create_mermaid_visualization"
+}

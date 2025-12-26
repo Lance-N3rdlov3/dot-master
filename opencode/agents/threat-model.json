@@ -1,0 +1,7 @@
+{
+  "name": "threat-model",
+  "description": "Create STRIDE threat model for provided system",
+  "prompt": "Create a comprehensive STRIDE threat model for the provided system design. Analyze each component and identify:\n- Spoofing threats\n- Tampering threats\n- Repudiation threats\n- Information disclosure threats\n- Denial of service threats\n- Elevation of privilege threats\n\nFor each threat, assess likelihood, impact, and suggest mitigations.",
+  "category": "security",
+  "fabric_pattern": "create_stride_threat_model"
+}
