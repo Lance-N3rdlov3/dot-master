@@ -1,278 +1,219 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+### Prompt
 
-format = """
-[](red)\
-$os\
-$username\
-[](bg:peach fg:red)\
-$directory\
-[](bg:yellow fg:peach)\
-$git_branch\
-$git_status\
-[](fg:yellow bg:green)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
-$python\
-[](fg:green bg:sapphire)\
-$conda\
-[](fg:sapphire bg:lavender)\
-$time\
-[ ](fg:lavender)\
-$cmd_duration\
-$line_break\
+# The format layout for the prompt is as follows:
+
+# left side
+# fill (expands to fill the remaining space between left and right prompts)
+# right side info
+# right side additional tools and versions
+# prompt character
+
+# Commands may be slower in restricted environments, e.g. containers
+command_timeout = 10000
+
+format = """$sudo$username$hostname$directory$git_branch$git_commit$git_state$git_status\
+$fill\
+$jobs$status$cmd_duration\
+$nix_shell$terraform${custom.terraform}${custom.terragrunt}$kubernetes$python$aws$nodejs$docker_context$golang${custom.loadavg-linux}${custom.loadavg-mac}${custom.disk-linux}${custom.disk-mac}$memory_usage$time$os
 $character"""
 
-palette = 'catppuccin_mocha'
+# TODO: transient prompt released in v1.10.1
+
+# Additional padding between newlines
+add_newline = true
+
+[fill]
+symbol = " "
+
+[character]
+vimcmd_symbol = "[NORMAL ❯](#73cef4)"
+success_symbol = "[❯](green)"
+format = "\n$symbol "
+
+### Left prompt
+
+[sudo]
+disabled = false
+symbol = "🧙"
+format = "[$symbol]($style)"
+
+[username]
+# Don't display for normal logged in user
+disabled = true
+style_user = "#d3b987"
+format = "[$user]($style)"
+
+[hostname]
+disabled = true
+ssh_only = true
+style = "#d3b987"
+format = "[@$hostname]($style)[ ❯](#767676)"
+
+[directory]
+read_only = " "
+truncation_length = 2
+truncate_to_repo = false
+repo_root_style = "#0087af"
+fish_style_pwd_dir_length = 2
+style = "#00afff"
+# Repo format
+repo_root_format = "[ $before_root_path]($style)[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
+# Non repo format
+format = "[ $path]($style)[$read_only]($read_only_style) "
+
+[git_branch]
+symbol = "  "
+style = "green"
+format = "[❯ ](#767676)[$symbol$branch]($style)"
+
+[git_status]
+stashed = "[*${count}](blue) "
+modified = "[!${count}](yellow) "
+staged = "[+${count}](green) "
+untracked = "[?${count}](blue) "
+deleted = "[-${count}](red) "
+format = " ([$stashed$modified$staged$untracked $ahead_behind]($style))"
+#format = " ([$all_status $ahead_behind]($style))"
+
+### Right prompt info
+
+[jobs]
+disabled = false
+format = "[$number]($style)"
+
+[status]
+disabled = false
+map_symbol = false
+format = "[$symbol$status]($style)"
+
+[cmd_duration]
+style = "#a8a8a8"
+format = "([ ❮ ](#767676)[$duration ]($style))"
+
+### Right prompt tools and versions
+
+[terraform]
+# We disable the native tf plugin because it is much slower than tfenv
+disabled = true
+format = "[ ❮ ](#767676)[tf $version]($style)"
+detect_extensions = ["tf"]
+detect_files = ["terragrunt.hcl"]
+
+[kubernetes]
+disabled = false
+style = "blue"
+format = '([ ❮ ](#767676)[$symbol$context (\[$namespace\])]($style))'
+detect_extensions = []
+detect_files = ['Chart.yaml']
+detect_folders = ['*helm*']
+
+[golang]
+symbol = " "
+format = "([ ❮ ](#767676)[$symbol($version)]($style))"
+
+[nodejs]
+symbol = " "
+format = "([ ❮ ](#767676)[$symbol($version)]($style))"
+
+[python]
+symbol = " "
+format = '([ ❮ ](#767676)[${symbol}${pyenv_prefix}(${version}) ([\($virtualenv\)](#306998))]($style))'
+
+[aws]
+disabled = false
+symbol = " "
+format = '([ ❮ ](#767676)[$symbol$profile(\[$duration\])]($style))'
+
+[conda]
+symbol = " "
+
+[docker_context]
+symbol = " "
+format = "([ ❮ ](#767676)[$symbol$context]($style))"
+
+[nix_shell]
+symbol = " "
+format = "[${symbol}nix ${state} ]($style)"
+
+[memory_usage]
+disabled = false
+threshold = -1
+symbol = ""
+style = "#5f8787"
+format = "([ ❮ ](#767676)[$ram_pct $symbol]($style))"
+
+[time]
+disabled = true
+format = "([ ❮ ](#767676)[$time]($style))"
+
+[shlvl]
+disabled = true
 
 [os]
 disabled = false
-style = "bg:red fg:crust"
+format = "[ ❮ ](#767676)[$symbol]($style)"
 
 [os.symbols]
-Windows = ""
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
-Macos = "󰀵"
-Manjaro = ""
-Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
+"Alpine" = ""
+"Arch" = ""
+"CentOS" = ""
+"Debian" = ""
+"Fedora" = ""
+"Gentoo" = ""
+"Linux" = ""
+"Macos" = ""
+"Manjaro" = ""
+"Mint" = ""
+"NixOS" = ""
+"Raspbian" = ""
+"Ubuntu" = ""
+"Windows" = ""
 
-[username]
-show_always = true
-style_user = "bg:red fg:crust"
-style_root = "bg:red fg:crust"
-format = '[ $user]($style)'
+### Custom plugins
 
-[directory]
-style = "bg:peach fg:crust"
-format = "[ $path ]($style)"
-truncation_length = 3
-truncation_symbol = "…/"
+[custom.terragrunt]
+description = "Shows the currently active tgenv Terragrunt version"
+command = "cat $(pwd)/.terragrunt-version || cat $(git rev-parse --show-toplevel)/.terragrunt-version || cat ~/.tgenv/version"
+files = ["terragrunt.hcl"]
+style = "#0bb9f2"
+format = "([ ❮ ](#767676)[tg $output]($style))"
 
-[directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+[custom.terraform]
+description = "Shows the currently active tfenv Terraform version"
+command = "cat $(pwd)/.terraform-version || cat $(git rev-parse --show-toplevel)/.terraform-version || cat ~/.tfenv/version"
+extensions = ["tf"]
+files = ["terragrunt.hcl"]
+style = "#7b42bc"
+format = "([ ❮ ](#767676)[tf $output]($style))"
 
-[git_branch]
-symbol = ""
-style = "bg:yellow"
-format = '[[ $symbol $branch ](fg:crust bg:yellow)]($style)'
+[custom.disk-linux]
+description = "Show disk used"
+command = 'df -h --output=avail "$PWD" | tail -n 1'
+style = "#00af5f"
+format = "[ ❮ ](#767676)[$output ]($style)"
+when = "true"
+os = "linux"
 
-[git_status]
-style = "bg:yellow"
-format = '[[($all_status$ahead_behind )](fg:crust bg:yellow)]($style)'
+[custom.disk-mac]
+description = "Show % of disk used"
+command = "df -k | grep -E '/dev/disk(1|3)s(3|4)' | awk '{ print $5 }' | head -n 1 | sed 's/%//'"
+style = "#00af5f"
+format = "[ ❮ ](#767676)[$output% ]($style)"
+when = "true"
+os = "macos"
 
-[nodejs]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
+[custom.loadavg-linux]
+description = "Show load average"
+command = "cat /proc/loadavg | cut -d' ' -f 2"
+style = "#5f8787"
+format = "([ ❮ ](#767676)[$output ]($style))"
+when = "true"
+os = "linux"
 
-[c]
-symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[rust]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[golang]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[php]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[java]
-symbol = " "
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[kotlin]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[haskell]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version) ](fg:crust bg:green)]($style)'
-
-[python]
-symbol = ""
-style = "bg:green"
-format = '[[ $symbol( $version)(\(#$virtualenv\)) ](fg:crust bg:green)]($style)'
-
-[docker_context]
-symbol = ""
-style = "bg:sapphire"
-format = '[[ $symbol( $context) ](fg:crust bg:sapphire)]($style)'
-
-[conda]
-symbol = "  "
-style = "fg:crust bg:sapphire"
-format = '[$symbol$environment ]($style)'
-ignore_base = false
-
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:lavender"
-format = '[[  $time ](fg:crust bg:lavender)]($style)'
-
-[line_break]
-disabled = true
-
-[character]
-disabled = false
-success_symbol = '[❯](bold fg:green)'
-error_symbol = '[❯](bold fg:red)'
-vimcmd_symbol = '[❮](bold fg:green)'
-vimcmd_replace_one_symbol = '[❮](bold fg:lavender)'
-vimcmd_replace_symbol = '[❮](bold fg:lavender)'
-vimcmd_visual_symbol = '[❮](bold fg:yellow)'
-
-[cmd_duration]
-show_milliseconds = true
-format = " in $duration "
-style = "bg:lavender"
-disabled = false
-show_notifications = true
-min_time_to_notify = 45000
-
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
-
-[palettes.catppuccin_frappe]
-rosewater = "#f2d5cf"
-flamingo = "#eebebe"
-pink = "#f4b8e4"
-mauve = "#ca9ee6"
-red = "#e78284"
-maroon = "#ea999c"
-peach = "#ef9f76"
-yellow = "#e5c890"
-green = "#a6d189"
-teal = "#81c8be"
-sky = "#99d1db"
-sapphire = "#85c1dc"
-blue = "#8caaee"
-lavender = "#babbf1"
-text = "#c6d0f5"
-subtext1 = "#b5bfe2"
-subtext0 = "#a5adce"
-overlay2 = "#949cbb"
-overlay1 = "#838ba7"
-overlay0 = "#737994"
-surface2 = "#626880"
-surface1 = "#51576d"
-surface0 = "#414559"
-base = "#303446"
-mantle = "#292c3c"
-crust = "#232634"
-
-[palettes.catppuccin_latte]
-rosewater = "#dc8a78"
-flamingo = "#dd7878"
-pink = "#ea76cb"
-mauve = "#8839ef"
-red = "#d20f39"
-maroon = "#e64553"
-peach = "#fe640b"
-yellow = "#df8e1d"
-green = "#40a02b"
-teal = "#179299"
-sky = "#04a5e5"
-sapphire = "#209fb5"
-blue = "#1e66f5"
-lavender = "#7287fd"
-text = "#4c4f69"
-subtext1 = "#5c5f77"
-subtext0 = "#6c6f85"
-overlay2 = "#7c7f93"
-overlay1 = "#8c8fa1"
-overlay0 = "#9ca0b0"
-surface2 = "#acb0be"
-surface1 = "#bcc0cc"
-surface0 = "#ccd0da"
-base = "#eff1f5"
-mantle = "#e6e9ef"
-crust = "#dce0e8"
-
-[palettes.catppuccin_macchiato]
-rosewater = "#f4dbd6"
-flamingo = "#f0c6c6"
-pink = "#f5bde6"
-mauve = "#c6a0f6"
-red = "#ed8796"
-maroon = "#ee99a0"
-peach = "#f5a97f"
-yellow = "#eed49f"
-green = "#a6da95"
-teal = "#8bd5ca"
-sky = "#91d7e3"
-sapphire = "#7dc4e4"
-blue = "#8aadf4"
-lavender = "#b7bdf8"
-text = "#cad3f5"
-subtext1 = "#b8c0e0"
-subtext0 = "#a5adcb"
-overlay2 = "#939ab7"
-overlay1 = "#8087a2"
-overlay0 = "#6e738d"
-surface2 = "#5b6078"
-surface1 = "#494d64"
-surface0 = "#363a4f"
-base = "#24273a"
-mantle = "#1e2030"
-crust = "#181926"
+[custom.loadavg-mac]
+description = "Show load average"
+command = "sysctl -n vm.loadavg | cut -d' ' -f 2"
+style = "#5f8787"
+format = "([ ❮ ](#767676)[$output ]($style))"
+when = "true"
+os = "macos"
