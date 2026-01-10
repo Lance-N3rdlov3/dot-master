@@ -1,197 +1,107 @@
-# Add user configurations here
-# For HyDE to not touch your beloved configurations,
-# we added a config file for you to customize HyDE before loading zshrc
-# Edit $ZDOTDIR/.user.zsh to customize HyDE before loading zshrc
 
-#  Plugins 
-# oh-my-zsh plugins are loaded  in $ZDOTDIR/.user.zsh file, see the file for more information
-
-#  Aliases 
-# Override aliases here in '$ZDOTDIR/.zshrc' (already set in .zshenv)
-alias exa='eza'
-# # Helpful aliases
-alias c='clear'                                                        # clear terminal
-# alias l='eza -lh --icons=auto'                                         # long list
-# alias ls='eza -1 --icons=auto'                                         # short list
-# alias ll='eza -lha --icons=auto --sort=name --group-directories-first' # long list all
-# alias ld='eza -lhD --icons=auto'                                       # long list dirs
-# alias lt='eza --icons=auto --tree'                                     # list folder as tree
- alias un='$aurhelper -Rns'                                             # uninstall package
- alias up='$aurhelper -Syu'                                             # update system/package/aur
- alias pl='$aurhelper -Qs'                                              # list installed package
- alias pa='$aurhelper -Ss'                                              # list available package
- alias pc='$aurhelper -Sc'                                              # remove unused cache
- alias po='$ajurhelper -Qtdq | $aurhelper -Rns -'                        # remove unused packages, also try > $aurhelper -Qqd | $aurhelper -Rsu --print -
- alias vc='code'                                                        # gui code editor
- alias fastfetch='fastfetch --logo-type kitty'
-
-# # Directory navigation shortcuts
- alias ..='cd ..'
- alias ...='cd ../..'
- alias .3='cd ../../..'
- alias .4='cd ../../../..'
- alias .5='cd ../../../../..'
-
-# # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
-alias mkdir='mkdir -p'
-# Replace ls with exa
-alias ls='exa -aG --color=always --group-directories-first --icons --sort type' # preferred listing
- 
-alias la='exa -aG --color=always --group-directories-first --icons'  # all fils and dirs
-alias ll='exa -lG --color=always --group-directories-first --icons'  # long format
-alias lt='exa -aT --color=always --group-directories-first --icons --sort name' # tree listing
-alias l.='exa -ald --color=always --group-directories-first --icons .*' # show only dotfiles
-
-# Replace some more things with better alternatives
-#alias cat='bat --style header --style snip --style changes --style numbers --style grid --style changes --style rule --color always'
-[ ! -x /usr/bin/yay ] && [ -x /usr/bin/paru ] && alias yay='paru'
-
-# Common use
-alias grubup="sudo update-grub"
-alias fixpacman="sudo rm /var/lib/pacman/db.lck"
-alias tarnow='tar -acf '
-alias untar='tar -zxvf '
-alias wget='wget -c '
-alias rmpkg="sudo pacman -Rdd"
-alias psmem='ps auxf | sort -nr -k 4'
-alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-alias upd='sudo pacman -Syyu --noconfirm'
-#alias ..='cd ..'
-#alias ...='cd ../..'
-#alias ....='cd ../../..'
-#alias .....='cd ../../../..'
-#alias ......='cd ../../../../..'
-alias dir='dir --color=auto'
-alias vdir='vdir --color=auto'
-alias grep='rg --color=auto'
-alias fgrep='rg -F --color=auto'
-alias egrep='rg -E --color=auto'
-alias hw='hwinfo --short'                          # Hardware Info
-alias big="expac -H M '%m\t%n' | sort -h | nl"     # Sort installed packages according to size in MB (expac must be installed)
-alias gitpkg='pacman -Q | grep -i "\-git" | wc -l' # List amount of -git packages
-alias ip='ip -color'
-
-# Get fastest mirrors
-alias mirror="sudo reflector -f 30 -l 30 --number 10 --verbose --save /etc/pacman.d/mirrorlist"
-alias mirrord="sudo reflector --latest 50 --number 20 --sort delay --save /etc/pacman.d/mirrorlist"
-alias mirrors="sudo reflector --latest 50 --number 20 --sort score --save /etc/pacman.d/mirrorlist"
-alias mirrora="sudo reflector --latest 50 --number 20 --sort age --save /etc/pacman.d/mirrorlist"
-
-# Help people new to Arch
-alias apt='man pacman'
-alias apt-get='man pacman'
-alias please='sudo'
-alias tb='nc termbin.com 9999'
-alias helpme='cht.sh --shell'
-alias pacdiff='sudo -H DIFFPROG=meld pacdiff'
-
-# Cleanup orphaned packages
-alias cleanup='sudo pacman -Rns $(pacman -Qtdq)'
-
-# Get the error messages from journalctl
-alias jctl="journalctl -p 3 -xb"
-
-# Recent installed packages
-alias rip="expac --timefmt='%Y-%m-%d %T' '%l\t%n %v' | sort | tail -200 | nl"
-
-# Load Mcfly
-export MCFLY_FUZZY=true
-export MCFLY_RESULTS=20
-export MCFLY_INTERFACE_VIEW=BOTTOM
-export MCFLY_RESULTS_SORT=LAST_RUN
-eval "$(mcfly init zsh)"
-
-## Run neofetch
-#neofetch
+# Personal Zsh configuration file. It is strongly recommended to keep all
+# shell customization and configuration (including exported environment
+# variables such as PATH) in this file or in files sourced from it.
 #
-export PATH=/bin:/sbin:$HOME/.local/bin:/usr/bin:/usr/share/:/usr/state:/usr/local/bin:/bin:/root/.local/bin:$HOME/bin:$HOME/.var:$HOME/.bin:$HOME/go/bin:$HOME/.pkgx/bin:$HOME/.local/bin:$HOME/.local/share/bin:$HOME/.local/share:$HOME/.local/lib:/usr/local/bin:/usr/share/bin:/usr/bin:/usr/sbin:$PATH
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
+
+# Periodic auto-update on Zsh startup: 'ask' or 'no'.
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'yes'
+# Ask whether to auto-update this often; has no effect if auto-update is 'no'.
+zstyle ':z4h:' auto-update-days '14'
+
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey' keyboard  'mac'
+
+# Start tmux if not already in tmux.
+#zstyle ':z4h:' start-tmux command tmux -u new -A -D -t z4h
+
+# Whether to move prompt to the bottom when zsh starts and on Ctrl+L.
+zstyle ':z4h:' prompt-at-bottom 'no'
+
+# Mark up shell's output with semantic information.
+zstyle ':z4h:' term-shell-integration 'yes'
+
+# Right-arrow key accepts one character ('partial-accept') from
+# command autosuggestions or the whole thing ('accept')?
+zstyle ':z4h:autosuggestions' forward-char 'accept'
+
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
+
+# Enable direnv to automatically source .envrc files.
+zstyle ':z4h:direnv'         enable 'no'
+# Show "loading" and "unloading" notifications from direnv.
+zstyle ':z4h:direnv:success' notify 'yes'
+
+# Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# SSH when connecting to these hosts.
+zstyle ':z4h:ssh:example-hostname1'   enable 'no'
+zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
+# The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:*'                   enable 'yes'
+
+# Send these files over to the remote host when connecting over SSH to the
+# enabled hosts.
+zstyle ':z4h:ssh:*' send-extra-files '~/.nanorc' '~/.env.zsh' 
+
+# Clone additional Git repositories from GitHub.
 #
-#  This is your file 
-# Add your configurations here
-# export EDITOR=nvim
-#export EDITOR=code
+# This doesn't do anything apart from cloning the repository and keeping it
+# up-to-date. Cloned files can be used after `z4h init`. This is just an
+# example. If you don't plan to use Oh My Zsh, delete this line.
+z4h install ohmyzsh/ohmyzsh || return
 
-# unset -f command_not_found_handler # Uncomment to prevent searching for commands not found in package manager
+# Install or update core components (fzf, zsh-autosuggestions, etc.) and
+# initialize Zsh. After this point console I/O is unavailable until Zsh
+# is fully initialized. Everything that requires user interaction or can
+# perform network I/O must be done above. Everything else is best done below.
+z4h init || return
 
-## Plugins section: Enable fish style features
-# Use syntax highlighting
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Extend PATH.
+#starship theme
+#eval "$(starship init zsh)"
 
-# Use autosuggestion
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+ export PATH=/opt/homebrew/bin:$PATH
 
-# Use history substring search
-source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
-
-# Use fzf
-source /usr/share/fzf/key-bindings.zsh
-source /usr/share/fzf/completion.zsh
-source <(fzf --zsh)
-
-
-# Arch Linux command-not-found support, you must have package pkgfile installed
-# https://wiki.archlinux.org/index.php/Pkgfile#.22Command_not_found.22_hook
-[[ -e /usr/share/doc/pkgfile/command-not-found.zsh ]] && source /usr/share/doc/pkgfile/command-not-found.zsh
-
-# Advanced command-not-found hook
-[[ -e /usr/share/doc/find-the-command/ftc.zsh ]] && source /usr/share/doc/find-the-command/ftc.zsh
+#test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
+export GOPATH=$HOME/go/
+#export GOROOT=$(brew --prefix go)/libexec
+export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$HOME/.mynav:$PATH
 
 
-## Options section
-setopt correct                                                  # Auto correct mistakes
-setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
-setopt nocaseglob                                               # Case insensitive globbing
-setopt rcexpandparam                                            # Array expension with parameters
-setopt nocheckjobs                                              # Don't warn about running processes when exiting
-setopt numericglobsort                                          # Sort filenames numerically when it makes sense
-setopt nobeep                                                   # No beep
-setopt appendhistory                                            # Immediately append history instead of overwriting
-setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
-setopt autocd                                                   # if only directory path is entered, cd there.
-setopt auto_pushd
-setopt pushd_ignore_dups
-setopt pushdminus
+export PATH=/opt/homebrew/opt/uutils-creutils/libexec/uubin:/opt/homebrew/bin:$HOME/bin:$HOME/.local/bin:/usr/bin:/bin:/sbin:/$HOME/.local/share:$HOME/.bin:/usr/sbin:/root:/etc:/proc:/opt:$PATH
+# Export environment variables.
+export GPG_TTY=$TTY
 
-# Completion.
-autoload -Uz compinit
-compinit
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
-zstyle ':completion:*' rehash true                              # automatically find new executables in path 
-zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
-zstyle ':completion:*' completer _expand _complete _ignored _approximate
-zstyle ':completion:*' menu select
-zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
-zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
+# Source additional local files if they exist.
+z4h source ~/.env.zsh
+z4h source ~/.config/zsh/functions/bat.zsh
+z4h source ~/.config/zsh/functions/eza.zsh
+z4h source ~/.config/zsh/functions/fzf.zsh
+z4h source ~/.config/zsh/functions/fzf-marks.plugin.zsh  
+z4h source ~/.config/zsh/functions/man.zsh
+z4h source ~/.config/zsh/functions/extr.zsh
+z4h source ~/.config/zsh/functions/error-handlers.zsh
+z4h source ~/.config/zsh/functions/y.zsh
+# Use additional Git repositories pulled in with `z4h install`.
+#
+# This is just an example that you should delete. It does nothing useful.
+z4h source ohmyzsh/ohmyzsh/lib/diagnostics.zsh  # source an individual file
+z4h load   ohmyzsh/ohmyzsh/plugins/emoji-clock  # load a plugin
 
-# Speed up completions
-zstyle ':completion:*' accept-exact '*(N)'
-zstyle ':completion:*' use-cache on
-zstyle ':completion:*' cache-path ~/.cache/zcache
+# Define key bindings.
+z4h bindkey undo Ctrl+/    # undo the last command line change
+z4h bindkey redo Option+/            # redo the last undone command line change
 
-# automatically load bash completion functions
-autoload -U +X bashcompinit && bashcompinit
-
-HISTFILE=~/.zhistory
-HISTSIZE=50000
-SAVEHIST=10000
-
-
-## Keys
+z4h bindkey z4h-cd-back    Shift+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward Shift+Right  # cd into the next directory
+z4h bindkey z4h-cd-up      Shift+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down    Shift+Down   # cd into a child directory
+#
 # Use emacs key bindings
 bindkey -e
-
-# [PageUp] - Up a line of history
-if [[ -n "${terminfo[kpp]}" ]]; then
-  bindkey -M emacs "${terminfo[kpp]}" up-line-or-history
-  bindkey -M viins "${terminfo[kpp]}" up-line-or-history
-  bindkey -M vicmd "${terminfo[kpp]}" up-line-or-history
-fi
-# [PageDown] - Down a line of history
-if [[ -n "${terminfo[knp]}" ]]; then
-  bindkey -M emacs "${terminfo[knp]}" down-line-or-history
-  bindkey -M viins "${terminfo[knp]}" down-line-or-history
-  bindkey -M vicmd "${terminfo[knp]}" down-line-or-history
-fi
 
 # Start typing + [Up-Arrow] - fuzzy find history forward
 if [[ -n "${terminfo[kcuu1]}" ]]; then
@@ -212,24 +122,12 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
 fi
 
-# [Home] - Go to beginning of line
-if [[ -n "${terminfo[khome]}" ]]; then
-  bindkey -M emacs "${terminfo[khome]}" beginning-of-line
-  bindkey -M viins "${terminfo[khome]}" beginning-of-line
-  bindkey -M vicmd "${terminfo[khome]}" beginning-of-line
-fi
-# [End] - Go to end of line
-if [[ -n "${terminfo[kend]}" ]]; then
-  bindkey -M emacs "${terminfo[kend]}"  end-of-line
-  bindkey -M viins "${terminfo[kend]}"  end-of-line
-  bindkey -M vicmd "${terminfo[kend]}"  end-of-line
-fi
 
 # [Shift-Tab] - move through the completion menu backwards
 if [[ -n "${terminfo[kcbt]}" ]]; then
-  bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
   bindkey -M viins "${terminfo[kcbt]}" reverse-menu-complete
   bindkey -M vicmd "${terminfo[kcbt]}" reverse-menu-complete
+  bindkey -M emacs "${terminfo[kcbt]}" reverse-menu-complete
 fi
 
 # [Backspace] - delete backward
@@ -245,7 +143,6 @@ else
   bindkey -M emacs "^[[3~" delete-char
   bindkey -M viins "^[[3~" delete-char
   bindkey -M vicmd "^[[3~" delete-char
-
   bindkey -M emacs "^[3;5~" delete-char
   bindkey -M viins "^[3;5~" delete-char
   bindkey -M vicmd "^[3;5~" delete-char
@@ -260,21 +157,7 @@ if (( ${+terminfo[smkx]} && ${+terminfo[rmkx]} )); then
 	add-zle-hook-widget -Uz zle-line-finish zle_application_mode_stop
 fi
 
-# Control Left - go back a word
-key[Control-Left]="${terminfo[kLFT5]}"
-if [[ -n "${key[Control-Left]}"  ]]; then
-	bindkey -M emacs "${key[Control-Left]}"  backward-word
-	bindkey -M viins "${key[Control-Left]}"  backward-word
-	bindkey -M vicmd "${key[Control-Left]}"  backward-word
-fi
 
-# Control Left - go forward a word
-key[Control-Right]="${terminfo[kRIT5]}"
-if [[ -n "${key[Control-Right]}" ]]; then
-	bindkey -M emacs "${key[Control-Right]}" forward-word
-	bindkey -M viins "${key[Control-Right]}" forward-word
-	bindkey -M vicmd "${key[Control-Right]}" forward-word
-fi
 
 # Alt Left - go back a word
 key[Alt-Left]="${terminfo[kLFT3]}"
@@ -292,113 +175,160 @@ if [[ -n "${key[Alt-Right]}" ]]; then
 	bindkey -M vicmd "${key[Alt-Right]}" forward-word
 fi
 
-function extract() {
-  # Check if a file was provided
-  if [ -z "$1" ]; then
-    echo "Usage: extract <archive_file>"
-    return 1
-  fi
-
-  # Check if the file exists
-  if [ ! -f "$1" ]; then
-    echo "Error: File '$1' not found."
-    return 1
-  fi
-
-  case "$1" in
-    # Tar archives
-    *.tar.bz2|*.tbz|*.tbz2) tar xvjf "$1" ;;
-    *.tar.gz|*.tgz) tar xvzf "$1" ;;
-    *.tar.xz|*.txz) tar xvJf "$1" ;;
-    *.tar.zst) tar --zstd -xvf "$1" ;;
-    *.tar.lz4) tar --lz4 -xvf "$1" ;;
-    *.tar) tar xvf "$1" ;;
-
-    # Individual compressed files
-    *.bz2) bunzip2 "$1" ;;
-    *.gz) gunzip "$1" ;;
-    *.xz) unxz "$1" ;;
-    *.zst) zstd -d "$1" ;;
-    *.lz4) lz4 -d "$1" ;;
-
-    # Other archives
-    *.zip) unzip "$1" ;;
-    *.rar) unrar x "$1" ;;
-    *.7z) 7z x "$1" ;;
-    *.Z) uncompress "$1" ;;
-    *.deb) ar x "$1" ;;
-    *.rpm) rpm2cpio "$1" | cpio -idmv ;;
-
-    # Fallback for unrecognized files
-    *)
-      echo "'$1' cannot be extracted with extract()"
-      return 1
-      ;;
-  esac
-}
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
- alias zconf="nvim ~/.config/zsh/.zshrc"
- alias uconf="nvim ~/.config/zsh/user.zsh"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-#source ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source ~/.bashrc
-
-alias mysql=/usr/local/mysql/bin/mysql
-#alias ls='eza -a --grid --group-directories-first --sort name --icons=always --color=always'
-alias vim='nvim'
-alias vi='nvim'
-alias v='nvim'
-alias micro='nvim'
-alias nano='nvim'
-#alias ra='TERM=xterm-256color ranger'
-#alias raj='TERM=xterm-256color ranger --choosedir=$HOME/.rangerdir; LASTDIR=`cat $HOME/.rangerdir`; cd "$LASTDIR"'
-#alias lt="eza -aTd --icons=always --color=always --sort Name"
-alias reload="source ~/.config/zsh/.zshrc"
-alias cl="clear"
-#alias c='clear'
-alias kconf='nvim ~/.config/kitty/kitty.conf'
-# ranger 配置
-export RANGER_LOAD_DEFAULT_RC=FALSE
-# 使用,补全历史记录
-bindkey ',' autosuggest-accept
-
-
-# vi-mode 使用nvim作为默认打开工具
-EDITOR=nvim
-export EDITOR
-
 bindkey '^h'  backward-char         #control+h：向左移动一个单词
 bindkey '^l'  forward-char          #control+l：向右移动一个单词
 bindkey '^k'  up-line-or-history    #control+k：向上翻看历史记录
 bindkey '^j'  down-line-or-history  #control+j：向下翻看历史记录
 
-zstyle ':omz:plugins:alias-finder' autoload yes # disabled by defaultzstyle 
+
+
+# Autoload functions.
+autoload -Uz zmv
+
+# Define functions and completions.
+function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories md
+
+# Completions and completion optimizations
+autoload -Uz compinit
+compinit
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'       # Case insensitive tab completion
+zstyle ':completion:*' rehash true                              # automatically find new executables in path
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"         # Colored completion (different colors for dirs/files/etc)
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' menu select
+zstyle ':completion:*' select-prompt '%SScrolling active: current selection at %p%s'
+zstyle ':completion:*:descriptions' format '%U%F{cyan}%d%f%u'
+
+# Speed up completions
+zstyle ':completion:*' accept-exact '*(N)'
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.cache/zcache
+zstyle ':omz:plugins:alias-finder' autoload yes # disabled by defaultzstyle
 zstyle ':omz:plugins:alias-finder' longer yes # disabled by default
 zstyle ':omz:plugins:alias-finder' exact yes # disabled by default
 zstyle ':omz:plugins:alias-finder' cheaper yes # disabled by default
 
 
-export FZF_DEFAULT_OPTS=" \
---color=bg+:#414559,bg:#303446,spinner:#F2D5CF,hl:#E78284 \
---color=fg:#C6D0F5,header:#E78284,info:#CA9EE6,pointer:#F2D5CF \
---color=marker:#BABBF1,fg+:#C6D0F5,prompt:#CA9EE6,hl+:#E78284 \
---color=selected-bg:#51576D \
---color=border:#737994"
+# automatically load bash completion functions
+autoload -U +X bashcompinit && bashcompinit
+
+HISTFILE=~/.zhistory
+HISTSIZE=50000
+SAVEHIST=10000
+
+
+# Define named directories: ~w <=> Windows home directory on WSL.
+#[[ -z $z4h_win_home ]] || hash -d w=$z4h_win_home
+
+# Define aliases.
+alias zconf="nvim ~/.zshrc"
+alias uconf="nvim ~/.config/zsh/"
+
+alias mysql=/usr/local/mysql/bin/mysql
+alias vim='nvim'
+alias vi='nvim'
+alias v='nvim'
+alias micro='nvim'
+alias nano='nvim'
+alias reload="source ~/.config/zsh/.zshrc"
+alias cl="clear"
+alias kconf='nvim ~/.config/kitty/kitty.conf'
+alias code='code .'
+
+bindkey ',' autosuggest-accept
+
+
+EDITOR=nvim
+export EDITOR
+#
+# Aliases
+alias tree='broot'
+alias c='clear'
+alias vc='code'  # gui code editor
+alias fastfetch='fastfetch --logo-type kitty'
+#
+# # Directory navigation shortcuts
+ alias ..='cd ..'
+ alias ...='cd ../..'
+ alias .3='cd ../../..'
+ alias .4='cd ../../../..'
+ alias .5='cd ../../../../..'
+#
+# # Always mkdir a path (this doesn't inhibit functionality to make a single dir)
+alias mkdir='mkdir -p'
+#
+# Replace ls with exa
+source $HOME/.config/zsh/functions/*
+#
+# Common Use
+alias tarnow='tar -acf '
+alias untar='tar -zxvf '
+alias wget='wget -c '
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='rg --color=auto'
+alias fgrep='rg -F --color=auto'
+alias egrep='rg -E --color=auto'
+alias hw='hwinfo --short'
+alias ip='ip -color'
+alias please='sudo'
+alias tb='nc termbin.com 9999'
+alias helpme='cht.sh --shell'
+# Get the error messages from journalctl
+alias jctl="journalctl -p 3 -xb"
+
+alias rmpkg="brew uninstall $@"
+# Add flags to existing aliases.
+
+# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+setopt glob_dots     # no special treatment for file names with a leading dot
+setopt no_auto_menu  # require an extra TAB press to open the completion menu
+setopt correct                                                  # Auto correct mistakes
+setopt extendedglob                                             # Extended globbing. Allows using regular expressions with *
+setopt nocaseglob                                               # Case insensitive globbing
+setopt rcexpandparam                                            # Array expension with parameters
+setopt nocheckjobs                                              # Don't warn about running processes when exiting
+setopt numericglobsort                                          # Sort filenames numerically when it makes sense
+setopt nobeep                                                   # No beep
+setopt appendhistory                                            # Immediately append history instead of overwriting
+setopt histignorealldups                                        # If a new command is a duplicate, remove the older one
+setopt autocd                                                   # if only directory path is entered, cd there.
+setopt auto_pushd
+setopt pushd_ignore_dups
+setopt pushdminus
+
+# Preferred editor for local and remote sessions
+ if [[ -n $SSH_CONNECTION ]]; then
+   export EDITOR='nvim'
+ else
+   export EDITOR='nvim'
+ fi
+
+# initialize various cli tools
+source <(fzf --zsh)
+eval "$(zoxide init zsh)"
+eval "$(mise activate zsh)"
+#source /opt/homebrew/etc/profile.d/z.sh
+
+[ ! -f "$HOME/.x-cmd.root/X" ] || . "$HOME/.x-cmd.root/X" # boot up x-cmd.
+
+# Added by Antigravity
+export PATH="/Users/nrd/.antigravity/antigravity/bin:$PATH"
+
 #starship theme
 #eval "$(starship init zsh)"
 
+ export PATH=/opt/homebrew/bin:$PATH
+
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
-export GOPATH=$HOME/go/
+#export GOPATH=$HOME/go/
 #export GOROOT=$(brew --prefix go)/libexec
 export PATH=$GOPATH/bin:$GOROOT/bin:$HOME/.local/bin:$HOME/.mynav:$PATH
 
-export SOFT_SERVE_INITIAL_ADMIN_KEYS=$HOME/.ssh/id_ed25519
+#export SOFT_SERVE_INITIAL_ADMIN_KEYS=$HOME/.ssh/id_ed25519
 
 # Generated for envman. Do not edit.
 #[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"
@@ -420,46 +350,240 @@ esac
 
  To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-tm ()
-{
-    local man_page;
-    man_page=$(man -k . | sort | fzf --prompt='Man Pages> ' --preview='echo {} | awk "{print \$1}" | xargs man' --preview-window=right:60%:wrap);
-    man "$(echo "$man_page" | awk '{print $1}')"
-}
+# bun completions
+[ -s "/Users/nrd/.bun/_bun" ] && source "/Users/nrd/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+# ===========================================
+# ZSH Hacks - Dreams of Code
+# ===========================================
+# Add these to your .zshrc file
+# -------------------------------------------
+# 1. Edit Command Buffer
+# -------------------------------------------
+# Open the current command in your $EDITOR (e.g., neovim)
+# Press Ctrl+X followed by Ctrl+E to trigger
+autoload -Uz edit-command-line
+zle -N edit-command-line
+bindkey '^X^E' edit-command-line
+
+# For Vi mode users:
+# bindkey -M vicmd 'v' edit-command-line
+
+# -------------------------------------------
+# 2. Undo in ZSH
+# -------------------------------------------
+# Press Ctrl+_ (Ctrl+Underscore) to undo
+# This is built-in, no configuration needed!
+# Redo widget exists but has no default binding:
+#bindkey '^Y' redo  # Example binding if you want it
+
+# -------------------------------------------
+# 3. Magic Space - Expand History
+# -------------------------------------------
+# Expands history expressions like !! or !$ when you press space
+bindkey ' ' magic-space
+
+# -------------------------------------------
+# 4. chpwd Hook - Run Commands on Directory Change
+# -------------------------------------------
+# NOTE: Only one chpwd hook can be defined at once
+# To merge them, use add-zsh-hook which is mentioned below
+
+# Example: List directory contents on cd
+
+#chpwd() {
+#  ls
+#}
+
+# Example: Auto-activate Python virtual environments
+#chpwd() {
+#  if [[ -d .venv ]]; then
+#    source .venv/bin/activate
+#  fi
+#}
+
+# Example: Auto-load Nix development shells
+#chpwd() {
+#  if [[ -f flake.nix ]] && [[ -z "$IN_NIX_SHELL" ]]; then
+#    nix develop
+#  fi
+#}
+
+# Example: Auto-use correct Node version with nvm
+#chpwd() {
+#  if [[ -f .nvmrc ]]; then
+#    nvm use
+#  fi
+#}
+
+# -------------------------------------------
+# 4.1. Bonus: Merging Hooks
+# -------------------------------------------
+
+# To merge hooks, use add-zsh-hook
+autoload -Uz add-zsh-hook
 
 
-
-
-#
-function help() {
-  if command -v bat >/dev/null 2>&1; then
-    "$@" --help | bat --style=auto --paging=auto --color=always
-  else
-    "$@" --help | cat
+# Then Define separate functions
+function auto_venv() {
+  # If already in a virtualenv, do nothing
+  if [[ -n "$VIRTUAL_ENV" && ! -f "$VIRTUAL_ENV/bin/activate" ]]; then
+    deactivate
   fi
+
+  [[ -n "$VIRTUAL_ENV" ]] && return
+
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/.venv/bin/activate" ]]; then
+      source "$dir/.venv/bin/activate"
+      return
+    fi
+    dir="${dir:h}"
+  done
 }
-alias cat='bat --style auto --decorations auto --color always' 
-# Added by Windsurf
-# jkk
-#export PATH="/Users/nrd/.codeium/windsurf/bin:/opt/metasploit-framework/bin:$PATH"
-#export PATH="$(brew --prefix)/opt/python@3.11/libexec/bin:$PATH"
-#export MANPAGER="sh -c 'awk '\''{ gsub(/\x1B\[[0-9;]*m/, \"\", \$0); gsub(/.\x08/, \"\", \$0); print }'\'' | bat -lman --color=always'"
-export MANPAGER='nvim +Man!'
-#export MANPAGER='sh -c "col -bx | bat --language=man --style=plain --paging=auto --color=always"' 
-BAT_THEME="Catppuccin Frappe"
-export EZA_CONFIG_DIR='/Users/nrd/.config/eza'
-eval "$(zoxide init zsh)"
-eval "$(mise activate zsh)"
-#
-source $HOME/.config/zsh/user.zsh
 
+function auto_nix() {
+  # If we're already in a nix develop shell, do nothing
+  [[ -n "$IN_NIX_SHELL" ]] && return
 
-function y() {
-	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
-	yazi "$@" --cwd-file="$tmp"
-	IFS= read -r -d '' cwd < "$tmp"
-	[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd"
-	rm -f -- "$tmp"
+  # Walk up to find a flake
+  local dir="$PWD"
+  while [[ "$dir" != "/" ]]; do
+    if [[ -f "$dir/flake.nix" ]]; then
+      # If this project already has .envrc, just allow it (you can remove this if you prefer)
+      if [[ ! -f "$dir/.envrc" ]]; then
+        # Create .envrc that loads the dev env (fast, no interactive shell)
+        #cat > "$dir/.envrc" << EOF
+      #  autogenerated: load flake dev environment
+          eval "$(nix print-dev-env)"
+          command direnv allow "$dir" >/dev/null 2>&1
+      fi
+          command direnv reload >/dev/null 2>&1
+          return
+      fi
+    dir="${dir:h}"
+  done
 }
-source ~/.config/zsh/fzf-marks.plugin.zsh 
 
+function auto_nvm() {
+  [[ -f .nvmrc ]] && nvm use
+}
+function cd_ls(){
+  eza -aG --color=always --group-directories-first --icons always --sort type
+}
+# Register them all
+add-zsh-hook chpwd auto_venv
+add-zsh-hook chpwd auto_nix
+add-zsh-hook chpwd auto_nvm
+add-zsh-hook chpwd cd_ls
+# -------------------------------------------
+# 5. Suffix Aliases - Open Files by Extension
+# -------------------------------------------
+# Just type the filename to open it with the associated program
+alias -s json=jless
+alias -s md=bat
+alias -s go='$EDITOR'
+alias -s rs='$EDITOR'
+alias -s txt=bat
+alias -s log=bat
+alias -s py='$EDITOR'
+alias -s js='$EDITOR'
+alias -s ts='$EDITOR'
+alias -s html=open  # macOS: open in default browser
+
+# -------------------------------------------
+# 6. Global Aliases - Use Anywhere in Commands
+# -------------------------------------------
+# Redirect stderr to /dev/null
+alias -g NE='2>/dev/null'
+
+# Redirect stdout to /dev/null
+alias -g NO='>/dev/null'
+
+# Redirect both stdout and stderr to /dev/null
+alias -g NUL='>/dev/null 2>&1'
+
+# Pipe to jq
+alias -g J='| jq'
+
+# Copy output to clipboard (macOS)
+alias -g C='| pbcopy'
+
+# Copy output to clipboard (Linux with xclip)
+# alias -g C='| xclip -selection clipboard'
+
+# -------------------------------------------
+# 7. zmv - Advanced Batch Rename/Move
+# -------------------------------------------
+# Enable zmv
+#autoload -Uz zmv
+
+# Usage examples:
+# zmv '(*).log' '$1.txt'           # Rename .log to .txt
+# zmv -w '*.log' '*.txt'           # Same thing, simpler syntax
+# zmv -n '(*).log' '$1.txt'        # Dry run (preview changes)
+# zmv -i '(*).log' '$1.txt'        # Interactive mode (confirm each)
+
+# Helpful aliases for zmv
+alias zcp='zmv -C'  # Copy with patterns
+alias zln='zmv -L'  # Link with patterns
+
+# -------------------------------------------
+# 8. Named Directories - Bookmark Folders
+# -------------------------------------------
+# Access with ~name syntax, e.g., cd ~yt or ls ~yt
+hash -d yt=~/projects/youtube
+hash -d dot=~/.dotfiles
+hash -d dl=~/Downloads
+hash -d conf=~/.config 
+hash -d zshc=~/.cofig/zsh/
+# Add your own commonly used directories here
+hash -d pro=~/projects/
+hash -d rep=~/repo/ 
+hash -d vault=~/repo/PKM/
+hash -d dm=~/repo/dot-master/
+hash -d gst=~/repo/gist/
+# -------------------------------------------
+# 9. Custom Widgets
+# -------------------------------------------
+# Clear screen but keep current command buffer
+function clear-screen-and-scrollback() {
+  echoti civis >"$TTY"
+  printf '%b' '\e[H\e[2J\e[3J' >"$TTY"
+  echoti cnorm >"$TTY"
+  zle redisplay
+}
+zle -N clear-screen-and-scrollback
+bindkey '^X^L' clear-screen-and-scrollback
+
+# Copy current command buffer to clipboard (macOS)
+function copy-buffer-to-clipboard() {
+  echo -n "$BUFFER" | pbcopy
+  zle -M "Copied to clipboard"
+}
+zle -N copy-buffer-to-clipboard
+bindkey '^X^C' copy-buffer-to-clipboard
+
+# For Linux with wl-copy:
+# function copy-buffer-to-clipboard() {
+#   echo -n "$BUFFER" | wl-copy
+#   zle -M "Copied to clipboard"
+# }
+
+# -------------------------------------------
+# 10. Hotkey Insertions - Text Snippets
+# -------------------------------------------
+# Insert git commit template (Ctrl+X, G, C)
+# \C-b moves cursor back one position
+#bindkey -s '^Xgc' 'git commit -m ""\C-b'
+
+# More examples:
+#bindkey -s '^Xgp' 'git push origin '
+#bindkey -s '^Xgs' 'git status\n'
+#bindkey -s '^Xgl' 'git log --oneline -n 10\n'
+
+export HOMEBREW_NO_ENV_HINTS=1
