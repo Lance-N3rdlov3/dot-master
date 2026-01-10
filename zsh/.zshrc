@@ -61,7 +61,11 @@ z4h init || return
 
 # Extend PATH.
 #starship theme
+<<<<<<< HEAD
 eval "$(starship init zsh)"
+=======
+#eval "$(starship init zsh)"
+>>>>>>> refs/remotes/origin/main
 
  export PATH=/opt/homebrew/bin:$PATH
 
@@ -348,8 +352,13 @@ esac
 
 
 
+<<<<<<< HEAD
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 #[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+=======
+ To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+>>>>>>> refs/remotes/origin/main
 # bun completions
 [ -s "/Users/nrd/.bun/_bun" ] && source "/Users/nrd/.bun/_bun"
 

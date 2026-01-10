@@ -393,8 +393,6 @@ export FZF_DEFAULT_OPTS=" \
 #starship theme
 #eval "$(starship init zsh)"
 
- export PATH=/opt/homebrew/bin:$PATH
-
 #test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 export GOPATH=$HOME/go/
 #export GOROOT=$(brew --prefix go)/libexec
@@ -435,7 +433,7 @@ tm ()
 #
 function help() {
   if command -v bat >/dev/null 2>&1; then
-    "$@" --help | bat --style=auto --paging=auto --color=always
+    "$@" --help | bat --style=auto --paging=never --color=always
   else
     "$@" --help | cat
   fi
