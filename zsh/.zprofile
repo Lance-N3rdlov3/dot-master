@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #!/usr/bin/env zsh
 
 # .zprofile - Sourced for login shells
@@ -18,3 +19,6 @@ export PATH="$PATH:/Users/nrd/.local/bin"
 if [[ -f "${ZDOTDIR:-$HOME/.config/zsh}/platform/${PLATFORM:-linux}.zsh" ]]; then
     source "${ZDOTDIR:-$HOME/.config/zsh}/platform/${PLATFORM:-linux}.zsh"
 fi
+=======
+eval "$(/opt/homebrew/bin/brew shellenv)"
+>>>>>>> 514f72f (updated for m3 macbook config)
